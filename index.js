@@ -11,7 +11,7 @@ app.get('/',(req,res)=>{
 
 io.on('connection', (socket) =>{
     const  username='User' + Math.floor(Math.random()*100).toString();
-    socket.emit('chat message',username+' connected');
+    socket.broadcast.emit('chat message',username+' connected');
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
         io.emit('chat message',username+': ' + msg);
@@ -22,4 +22,4 @@ io.on('connection', (socket) =>{
    });
 });
 
-server.listen(process.env.PORT)
+server.listen(3000)
